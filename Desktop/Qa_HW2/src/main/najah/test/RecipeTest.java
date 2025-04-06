@@ -2,6 +2,9 @@ package main.najah.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+
 import main.najah.code.Recipe;
 import main.najah.code.RecipeException;
 
@@ -9,10 +12,16 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Execution(ExecutionMode.CONCURRENT) 
 public class RecipeTest {
     
     Recipe recipe;
 
+    @BeforeAll
+    static void initAll() {
+        System.out.println("Testing has start...");
+    }
+    
     @BeforeEach
     void setUp() {
         recipe = new Recipe(); 
@@ -117,9 +126,15 @@ public class RecipeTest {
         assertTrue(recipe.equals(recipe2), "Recipes with the same name should be equal");
         fail("Test logic not yet implemented for validation.");
     }
+
     
     @AfterEach
     void tearDown() {
         System.out.println("Test completed :)");
+    }
+    
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("All tests have been completed!");
     }
 }

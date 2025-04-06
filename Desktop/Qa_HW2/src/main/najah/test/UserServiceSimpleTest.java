@@ -2,7 +2,9 @@ package main.najah.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -24,6 +26,11 @@ class UserServiceSimpleTest {
 
     private UserService userService;
 
+    @BeforeAll
+    static void initAll() {
+        System.out.println("Testing has start...");
+    }
+    
     @BeforeEach
     void setUp() {
         userService = new UserService();
@@ -33,7 +40,7 @@ class UserServiceSimpleTest {
     @Order(1)
     @DisplayName("Test isValidEmail with valid email")
     void testIsValidEmailValid() {
-        String validEmail = "user@example.com";
+        String validEmail = "sana@gmail.com";
         assertTrue(userService.isValidEmail(validEmail), "The email should be valid.");
         assertNotNull(validEmail, "The email should not be null.");
     }
@@ -42,7 +49,7 @@ class UserServiceSimpleTest {
     @Order(2)
     @DisplayName("Test isValidEmail with invalid email")
     void testIsValidEmailInvalid() {
-        String invalidEmail = "user.com";
+        String invalidEmail = "sana21.com";
         assertFalse(userService.isValidEmail(invalidEmail), "The email should be invalid.");
     }
 
@@ -60,7 +67,7 @@ class UserServiceSimpleTest {
     @Order(4)
     @DisplayName("Test authenticate with invalid username")
     void testAuthenticateInvalidUsername() {
-        String username = "user";
+        String username = "sana";
         String password = "1233";
         assertFalse(userService.authenticate(username, password), "The username should be invalid.");
     }
@@ -78,18 +85,18 @@ class UserServiceSimpleTest {
     @Order(6)
     @DisplayName("Test authenticate with invalid credentials")
     void testAuthenticateInvalidCredentials() {
-        String username = "user";
-        String password = "wrongpassword";
+        String username = "sana21";
+        String password = "1020304050";
         assertFalse(userService.authenticate(username, password), "The credentials should be invalid.");
     }
 
     @ParameterizedTest
     @Order(7)
     @CsvSource({
-        "user@example.com, true",
-        "user@com, false",
-        "admin@domain.com, true",
-        "wrongemail.com, false"
+        "sana21@example.com, true",
+        "hii@com, false",
+        "s12217400@stu.com, true",
+        "sanasaleh.com, false"
     })
     @DisplayName("Test isValidEmail with parameterized inputs")
     void testIsValidEmailParameterized(String email, boolean expected) {
@@ -123,4 +130,10 @@ class UserServiceSimpleTest {
     void tearDown() {
         System.out.println("Test completed :)");
     }
+
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("All tests have been completed!");
+    }
+    
 }

@@ -11,10 +11,10 @@ import org.junit.platform.suite.api.Suite;
     UserServiceSimpleTest.class, 
     CalculatorTest.class,
     ProductTest.class,
-    RecipeBookTest.class
+    RecipeBookTest.class,
+    RecipeTest.class
 })
 
 class AllTestsSuite {
-
 
 }

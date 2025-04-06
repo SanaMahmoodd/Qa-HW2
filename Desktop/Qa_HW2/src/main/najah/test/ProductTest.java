@@ -102,6 +102,31 @@ public class ProductTest {
         fail("Must update expected for this test.");
     }
 
+    @Test
+    @Order(8)
+    @DisplayName("Test 0% Discount (No Discount)")
+    void testZeroDiscount() {
+        product.applyDiscount(0);  // No discount
+        assertEquals(1000.0, product.getFinalPrice(), "Final price should be equal to the original price when no discount is applied.");
+    }
+
+    @Test
+    @Order(9)
+    @DisplayName("Test 50% Discount (Maximum Discount)")
+    void testFiftyPercentDiscount() {
+        product.applyDiscount(50);  // 50% discount
+        assertEquals(500.0, product.getFinalPrice(), "Final price should be 500.0 after a 50% discount.");
+    }
+
+    @Test
+    @Order(10)
+    @DisplayName("Test Product Creation with Zero Price")
+    void testProductCreationWithZeroPrice() {
+        Product productWithZeroPrice = new Product("Free Product", 0.0);
+        assertEquals(0.0, productWithZeroPrice.getPrice(), "The price of the product should be 0 when created with a zero price.");
+    }
+
+
     @AfterEach
     void tearDown() {
         System.out.println("Test execution completed.");

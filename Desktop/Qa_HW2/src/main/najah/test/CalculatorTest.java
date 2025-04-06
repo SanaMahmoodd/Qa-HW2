@@ -19,11 +19,15 @@ import main.najah.code.Calculator;
 public class CalculatorTest {
     
     Calculator calc;
+    
+    @BeforeAll
+    static void initAll() {
+        System.out.println("Testing has start...");
+    }
 
     @BeforeEach
     void setUp() {
         calc = new Calculator(); // Create a Calculator object before each test
-        System.out.println(Thread.currentThread().getName() + " started test.");
     }
 
     @Test
@@ -32,6 +36,8 @@ public class CalculatorTest {
     void testAddition() {
         assertEquals(5, calc.add(2, 3), "2 + 3 should be 5");
         assertEquals(15, calc.add(1, 2, 3, 4, 5), "1 + 2 + 3 + 4 + 5 should be 15");
+        //assertEquals(10, calc.add(1, 2, 3), "1 + 2 + 3 should be 6"); //Invalid 
+        
     }
     
     @ParameterizedTest
@@ -92,6 +98,10 @@ public class CalculatorTest {
     @AfterEach
     void tearDown() {
         System.out.println("Test completed :)");
-        System.out.println(Thread.currentThread().getName() + " finished test.");
+    }
+    
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("All tests have been completed!");
     }
 }
